@@ -25,7 +25,38 @@ const PersonalModel = ({navigation,modalVisible,setModalVisible,token}) => {
     // const [image,SetImage] = useState('');
     // const [Picture,setPicture] = useState('');
 
+    const [errormsg ,setErrormsg] = useState(null);
+    
+    async function senddata(){
+      if(!name || !gender || !age || !cnic || !country || !phoneno|| !allergies|| !medical){
+              setErrormsg("Please fillout all the filled !!! ");
+      }
+      else if(cnic.length != 13){
+          setErrormsg("CNIC should be 13 character long ,No space or Dash  !!! ");
+      }
+      else if(age.length > 2)
+      {
+          setErrormsg("Please Insert the correct Age which should not greater than 100 !!! ");
+      }
+      else{
+        axios
+          .post(myURL+"/OnlyUserRoutes/profile", {my_ID,my_ROLE,name,gender,age,cnic,country,phoneno,medical,allergies})
+          .then((res) => {
+          console.log(res.data);
+          console.log("Profile Save!! ")
+          setModalVisible(!modalVisible);
+          Alert.alert("SAVE PROFILE");
+          ()=>{navigation.navigate("Homeuser")}
+          
+          // {Alert.alert("Hi")}
+          })
+          .catch((err)=> {
+          console.log(err);
+          })
 
+      }
+
+    }
 
     return (  
         <>
@@ -44,32 +75,37 @@ const PersonalModel = ({navigation,modalVisible,setModalVisible,token}) => {
                     <View style={styles.modalView}>
                         <ScrollView style={{width:"100%"}}>
 
- 
+                         <Text style={{alignSelf:'center',fontSize:10,marginTop:20}}>      
+                          {
+                              errormsg ? (<View style={{backgroundColor:"#C2185B",margin:10}}><Text style={{alignSelf:'center',borderRadius:10,padding:5,color:'white',fontSize:10}}>{errormsg}</Text></View>) : null 
+                          }
+                         </Text>
+
                         <Text style={{alignSelf:'flex-start',color:'black',fontSize:15,margin:10,marginLeft:20}}>Name</Text>
-                        <TextInput style={styles.input} onChangeText={(name)=>{SetName(name)}} placeholder='Enter Name'/>
+                        <TextInput style={styles.input} onPressIn={()=>{setErrormsg(null)}} onChangeText={(name)=>{SetName(name)}} placeholder='Enter Name'/>
                         
                         {/* {console.log(firstname)} */}
 
                         <Text style={{alignSelf:'flex-start',color:'black',fontSize:15,margin:10,marginLeft:20}}>Gender</Text>
-                        <TextInput style={styles.input} onChangeText={(gender)=>{SetGender(gender)}}  placeholder="Enter Gender"/>
+                        <TextInput style={styles.input} onPressIn={()=>{setErrormsg(null)}} onChangeText={(gender)=>{SetGender(gender)}}  placeholder="Enter Gender"/>
 
                         <Text style={{alignSelf:'flex-start',color:'black',fontSize:15,margin:10,marginLeft:20}}>CNIC</Text>
-                        <TextInput style={styles.input} onChangeText={(cnic)=>{SetCNIC(cnic)}}  placeholder="Enter CNIC [without -]"/>
+                        <TextInput style={styles.input} onPressIn={()=>{setErrormsg(null)}} keyboardType="numeric" onChangeText={(cnic)=>{SetCNIC(cnic)}}  placeholder="Enter CNIC [without -]"/>
 
                         <Text style={{alignSelf:'flex-start',color:'black',fontSize:15,margin:10,marginLeft:20}}>Age</Text>
-                        <TextInput style={styles.input} onChangeText={(age)=>{SetAge(age)}}  placeholder="Enter Age  "/>
+                        <TextInput style={styles.input} onPressIn={()=>{setErrormsg(null)}} keyboardType="numeric" onChangeText={(age)=>{SetAge(age)}}  placeholder="Enter Age  "/>
 
                         <Text style={{alignSelf:'flex-start',color:'black',fontSize:15,margin:10,marginLeft:20}}>Phone Number</Text>
-                        <TextInput style={styles.input} onChangeText={(phone)=>{SetPhoneno(phone)}}  placeholder="Enter Phone"/>
+                        <TextInput style={styles.input} onPressIn={()=>{setErrormsg(null)}} keyboardType="numeric" onChangeText={(phone)=>{SetPhoneno(phone)}}  placeholder="Enter Phone"/>
 
                         <Text style={{alignSelf:'flex-start',color:'black',fontSize:15,margin:10,marginLeft:20}}>Country</Text>
-                        <TextInput style={styles.input} onChangeText={(country)=>{SetCountry(country)}}  placeholder="Enter Country"/>
+                        <TextInput style={styles.input} onPressIn={()=>{setErrormsg(null)}} onChangeText={(country)=>{SetCountry(country)}}  placeholder="Enter Country"/>
 
                         <Text style={{alignSelf:'flex-start',color:'black',fontSize:15,margin:10,marginLeft:20}}>Medical</Text>
-                        <TextInput style={styles.input} onChangeText={(medical)=>{SetMedical(medical)}}  placeholder="Enter Medical"/>
+                        <TextInput style={styles.input} onPressIn={()=>{setErrormsg(null)}} onChangeText={(medical)=>{SetMedical(medical)}}  placeholder="Enter Medical"/>
 
                         <Text style={{alignSelf:'flex-start',color:'black',fontSize:15,margin:10,marginLeft:20}}>Allergies</Text>
-                        <TextInput style={styles.input} onChangeText={(allergies)=>{SetAllergies(allergies)}}  placeholder="Enter Allergies"/>
+                        <TextInput style={styles.input} onPressIn={()=>{setErrormsg(null)}} onChangeText={(allergies)=>{SetAllergies(allergies)}}  placeholder="Enter Allergies"/>
 
                         {/* <Text style={{alignSelf:'flex-start',color:'black',fontSize:15,margin:10,marginLeft:20}}>Images</Text>
                         <TextInput style={styles.input} onChangeText={(country)=>{setcountry(country)}}  placeholder="Enter Image"/> */}
@@ -77,20 +113,7 @@ const PersonalModel = ({navigation,modalVisible,setModalVisible,token}) => {
 
                         <Pressable onPress={ 
                             (e)=>{
-                                axios
-                                .post(myURL+"/OnlyUserRoutes/profile", {my_ID,my_ROLE,name,gender,age,cnic,country,phoneno,medical,allergies})
-                                .then((res) => {
-                                console.log(res.data);
-                                console.log("Profile Save!! ")
-                                setModalVisible(!modalVisible);
-                                Alert.alert("SAVE PROFILE");
-                                ()=>{navigation.navigate("Homeuser")}
-                                
-                                // {Alert.alert("Hi")}
-                                })
-                                .catch((err)=> {
-                                console.log(err);
-                                })
+                                senddata();
                             }
                          }> 
                             <Text style={{borderRadius:10,alignSelf:'center',color:'white',fontSize:15,marginTop:20,backgroundColor:'#E92424',height:40,width:"60%",textAlign:'center',padding:10,fontWeight:'bold'}}>Profile</Text>

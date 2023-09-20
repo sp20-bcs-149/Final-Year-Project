@@ -104,7 +104,7 @@ const Homeuser = ({navigation}) => {
 {/* 3 */}
                         <Pressable
                         // style={[styles.button, styles.buttonClose]}
-                        onPress={() => setModalVisible(!modalVisible)}>
+                        onPress={() => navigation.navigate("UserSchedule")}>
                             <View style={{backgroundColor:"#94D8D7",width:150,height:150,borderRadius:10,justifyContent:'center',alignItems:'center',marginTop:20}}>
                                 <MaterialIcons name='schedule' size={45} color='white' />
                                 <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Schedule</Text>
@@ -115,7 +115,7 @@ const Homeuser = ({navigation}) => {
 {/* 4 */}
                         <Pressable
                         // style={[styles.button, styles.buttonClose]}
-                        onPress={() => setModalVisible(!modalVisible)}>
+                        onPress={() =>{navigation.navigate("News") }}>
                             <View style={{backgroundColor:"#94D8D7",width:150,height:150,borderRadius:10,justifyContent:'center',alignItems:'center',marginTop:20}}>
                                 <Ionicons name='newspaper-sharp' size={45} color='white' />
                                 <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>News</Text>
@@ -135,7 +135,7 @@ const Homeuser = ({navigation}) => {
 {/* 6 */}
                         <Pressable
                         // style={[styles.button, styles.buttonClose]}
-                        onPress={() => setModalVisible(!modalVisible)}>
+                        onPress={() => navigation.navigate('PdfPrintOut')}>
                             <View style={{backgroundColor:"#94D8D7",width:150,height:150,borderRadius:10,justifyContent:'center',alignItems:'center',marginTop:20}}>
                                 <FontAwesome5 name="print" size={45} color="white" />
                                 <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>PDF</Text>
@@ -146,7 +146,7 @@ const Homeuser = ({navigation}) => {
 {/* 7 */}
                         <Pressable
                         // style={[styles.button, styles.buttonClose]}
-                        onPress={() => setModalVisible(!modalVisible)}>
+                        onPress={() =>{navigation.navigate("Alert") }}>
                             <View style={{backgroundColor:"#94D8D7",width:150,height:150,borderRadius:10,justifyContent:'center',alignItems:'center',marginTop:20}}>
                                 <Foundation name="alert" size={45} color="white" />
                                 <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Alert</Text>

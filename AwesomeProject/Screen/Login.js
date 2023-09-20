@@ -21,6 +21,8 @@ const Login = ({navigation}) =>{
     function checkfiled(){
         if( !email || !password ){
             setErrormsg("Please fillout all the filled !!! ");
+        }else{
+            setErrormsg("Incorrect Email & Password")
         }
     }
 
@@ -75,12 +77,12 @@ const Login = ({navigation}) =>{
                         </Text>
                         
                         <Text style={{alignSelf:'flex-start',color:'white',fontSize:15,margin:10,marginLeft:60,marginTop:10}}>Email</Text>
-                        <TextInput style={styles.input} onChangeText={(email)=>{setEmail(email)}} placeholder='Enter Name'/>
+                        <TextInput style={styles.input} onPressIn={()=>{setErrormsg(null)}} onChangeText={(email)=>{setEmail(email)}} placeholder='Enter Name'/>
                         
                         {/* {console.log(name)} */}
 
                         <Text style={{alignSelf:'flex-start',color:'white',fontSize:15,margin:10,marginLeft:60}}>Password</Text>
-                        <TextInput style={styles.input} onChangeText={(pass)=>{setPassword(pass)}}  placeholder="Enter Password"  />
+                        <TextInput style={styles.input} onPressIn={()=>{setErrormsg(null)}} onChangeText={(pass)=>{setPassword(pass)}}  placeholder="Enter Password"  />
 
                         <TouchableOpacity onPress={
                             
@@ -95,7 +97,7 @@ const Login = ({navigation}) =>{
                                 console.log(" LOGIN TOKEN  Role= " + mytok.role);
                                 
                                 if(mytok.role.toLowerCase() == "user"){
-                                    navigation.navigate("Homeuser",{token_id:mytok._id});
+                                    navigation.navigate("UserDrawer");
 
                                     
                                 }else if(mytok.role.toLowerCase() == "admin"){

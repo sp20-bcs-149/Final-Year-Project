@@ -45,8 +45,10 @@ const SignUp = ({navigation}) =>{
             setErrormsg("Password and Confirm password is Incorrect")
         }
         else if(isValidPassword == false){
-                setpasswordError("Password should be atleast 1 Small,Large and 1 special character and 1 digit");
+                setpasswordError("Password should be atleast 1 Small,Large and 1 special character and 1 digit and 8 digit");
         }else{
+               // navigation.navigate("EmailAuthentication",{name,email,password,role});
+
             userService
             .register(name,email,password,role)
             .then((data)=>{
@@ -63,13 +65,12 @@ const SignUp = ({navigation}) =>{
                 // });
             });
 
-        }
-        console.log("Signup Successfully data : " +name,email,password,role);
+         }
+        //console.log("Signup Successfully data : " +name,email,password,role);
     }
 
     return(
         <>
-        
            <ImageBackground 
                 source={img}
                 resizeMode='cover'

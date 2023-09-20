@@ -6,8 +6,21 @@ const { User } = require('../../model/user');
 
 const config = require('config');
 
+const nodemailer = require('nodemailer');
+
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail', // e.g., 'Gmail'
+  auth: {
+    user: 'adeelilyas7373@gmail.com',
+    pass: 'daku14551191999',
+  },
+});
+
+
 router.post('/signup', async (req,res)=>{
     // res.send("This is signUp page");
+
 
     console.log(req.body);
     const {name,email,password,role} = req.body;
@@ -18,6 +31,28 @@ router.post('/signup', async (req,res)=>{
 
     let useralready = await User.findOne({ email : req.body.email });
     if(useralready) return res.status(400).send("User with this email Already Exist");
+
+
+    // Create an email with registration confirmation message
+        const mailOptions = {
+            from: 'adeelilyas7373@gmail.com',
+            to: email,
+            subject: 'Registration Confirmation',
+            text: `Hello ${name},\n\nThank you for registering with our app!`,
+        };
+
+        // Send the email
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+            console.error('Email sending error:', error);
+            return res.status(500).json({ message: 'Email sending failed.' });
+            } else {
+            console.log('Email sent:', info.response);
+            res.status(201).json({ message: 'Registration successful. Confirmation email sent.' });
+            }
+        });
+
+
 
     let user = new User();
     user.name = req.body.name;       // ?? try name1;

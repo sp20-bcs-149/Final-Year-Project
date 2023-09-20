@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../Screen/Home';
 import SignUp from '../Screen/Signup';
 import Login from '../Screen/Login';
-
+import EmailAuthentication from '../Screen/Authenticate';
 //
 import SplashScreen from '../Screen/splashscreen';
 import Homeuser from '../Screen/user/Homeuser';
@@ -36,8 +36,16 @@ import ReminderVaccine from '../Screen/user/ReminderVaccine';
 import ChildTrack from '../Screen/user/ChildTrack';
 import BookVaccine from '../Screen/user/BookVaccine';
 import VerificationForm from '../Screen/Clinic/VerificationForm';
+import UserSchedule from '../Screen/user/UserSchedule';
+import ChoseClinic from '../Screen/user/ChoseClinic';
+import DateDay from '../Screen/user/DateDay';
+import Alert from '../Screen/user/alert';
+import VaccineSelection from '../Screen/user/VaccineSelection';
 
-
+// all admin screen
+import AlertSend from '../Screen/admin/alertsend';
+import AlertAdminforEditDelete from '../Screen/admin/alertAdminforEditDelete';
+import NewsSend from '../Screen/admin/NewsSend';
 
 
 
@@ -52,6 +60,7 @@ const Navigation = () =>{
                 <Stack.Screen name="Splash" component={SplashScreen} />
                 <Stack.Screen name="SignUp" component={SignUp} />
                 <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="EmailAuthentication" component={EmailAuthentication} />
                 <Stack.Screen name="DeliveryBottomNavigation" component={DeliveryBottomNavigation} />
                 <Stack.Screen name="AdminBottomNavigation" component={AdminBottomNavigation} />
                 <Stack.Screen name="UserBottomNavigation" component={UserBottomNavigation} />
@@ -67,12 +76,21 @@ const Navigation = () =>{
                 <Stack.Screen name="ChildRecord" component={ChildRecord} />
                 <Stack.Screen name="ChildTrack" component={ChildTrack} />
                 <Stack.Screen name="Schedule" component={Schedule} />
+                <Stack.Screen name="UserSchedule" component={UserSchedule} />
                 <Stack.Screen name="News" component={News} />
+                <Stack.Screen name="ChoseClinic" component={ChoseClinic} />
+                <Stack.Screen name="DateDay" component={DateDay} />
                 <Stack.Screen name="PdfPrintOut" component={PdfPrintOut} />
                 <Stack.Screen name="ReminderVaccine" component={ReminderVaccine} />
+                <Stack.Screen name="Alert" component={Alert} />
                 <Stack.Screen name="BookVaccine" component={BookVaccine} />
+                <Stack.Screen name="VaccineSelection" component={VaccineSelection} />
 
 {/* all admin componets */}
+                <Stack.Screen name="AlertSend" component={AlertSend} />
+                <Stack.Screen name="NewsSend" component={NewsSend} />
+                <Stack.Screen name="AlertAdminforEditDelete" component={AlertAdminforEditDelete} />
+
 {/* all clinic component */}
                 <Stack.Screen name="VerificationForm" component={VerificationForm} />
 
